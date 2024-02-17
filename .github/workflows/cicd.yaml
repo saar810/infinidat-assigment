@@ -8,6 +8,7 @@ env:
   USERNAME: ${{ github.actor }}
   IMAGE_NAME: my-flask-app
   IMAGE_TAG: ${{ github.sha }}
+  PYTHON_VERSION: '3.10'
 
 jobs:
   build-and-push-image:
@@ -34,3 +35,18 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+  test-and-lint:
+    name: Test and Lint Code
+    runs-on: ubuntu-22.04
+    needs: build-and-push-image
+    container:
+      image: ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+    steps:
+      - name: Lint Code
+        run: |
+          python -m black .
+          python -m flake8 --config ./.linters/.flake8
+      - name: Test Code
+        run: |
+          cd tests; python test_app.py
+     
