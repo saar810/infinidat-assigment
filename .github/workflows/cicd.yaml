@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY_NAME: ghcr.io
   IMAGE_NAME: my-flask-app
-  IMAGE_TAG: github.sha
+  IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   build-and-push-image:
