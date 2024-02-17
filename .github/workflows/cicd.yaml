@@ -2,11 +2,10 @@ name: deploy-flask-deploy-flask-app
 
 on:
   push:
-    branches:
-      - main
 
 env:
   REGISTRY_NAME: ghcr.io
+  USERNAME: ${{ github.actor }}
   IMAGE_NAME: my-flask-app
   IMAGE_TAG: ${{ github.sha }}
 
@@ -34,4 +33,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          tags: ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
