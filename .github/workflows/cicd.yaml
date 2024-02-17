@@ -40,8 +40,10 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build-and-push-image
     container:
-      image: ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      image: ghcr.io/${{ github.actor }}/my-flask-app:${{ github.sha }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Lint Code
         run: |
           python -m black .
