@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: ghcr.io/saar810/my-flask-app:113e563707e453a7e588a2adae1716aaa0136f68
+          image: ghcr.io/saar810/my-flask-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
