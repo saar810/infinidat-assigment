@@ -55,6 +55,7 @@ jobs:
   tag-latest:
     name: Tag latest if PR merged
     runs-on: ubuntu-22.04
+    needs: [build-and-push-image, test-and-lint]
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Tag latest
