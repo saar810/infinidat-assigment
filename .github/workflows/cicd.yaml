@@ -55,7 +55,7 @@ jobs:
   tag-latest:
     name: Tag latest if PR merged
     runs-on: ubuntu-22.04
-    if: github.ref == 'refs/heads/main' && github.event.pull_request.merged == true 
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Tag latest
         run: |
