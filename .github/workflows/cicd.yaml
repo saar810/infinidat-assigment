@@ -2,9 +2,7 @@ name: deploy-flask-deploy-flask-app
 
 on:
   push:
-  pull_request:
-    types:
-      - closed
+
 env:
   REGISTRY_NAME: ghcr.io
   USERNAME: ${{ github.actor }}
@@ -57,7 +55,7 @@ jobs:
   tag-latest:
     name: Tag latest if PR merged
     runs-on: ubuntu-22.04
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/main' && github.event.pull_request.merged == true 
     steps:
       - name: Tag latest
         run: |
