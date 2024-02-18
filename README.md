@@ -71,7 +71,7 @@ The files would be checked out to a newly created github machine which will then
 
 The created image will then be pulled and used as container while the ci run unittests and linters over the code.
 
-Once merged a PR to the main branch, the cicd.yaml would be triggered again but tagging the pushed image as "latest" and pushing to ghcr.
+On push to the main branch (after PR) the cicd.yaml would be triggered again but tagging the pushed image as "latest" and pushing to ghcr.
 
 ## Configuration
 
