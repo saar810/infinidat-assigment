@@ -3,13 +3,13 @@ kind: Namespace
 metadata:
   name: flask-app-ns 
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-app
   namespace: flask-app-ns 
 spec:
-  replicats: 1
+  replicas: 1
   selector:
     matchLabels:
       app: flask-app
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: ghcr.io/saar810/my-flask-app:latest
+          image: ghcr.io/saar810/my-flask-app:113e563707e453a7e588a2adae1716aaa0136f68
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
