@@ -60,5 +60,6 @@ jobs:
     steps:
       - name: Tag latest
         run: |
+          docker pull ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           docker tag ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:latest
           docker push ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:latest
