@@ -75,11 +75,16 @@ Once merged a PR to the main branch, the cicd.yaml would be triggered again but 
 
 ## Configuration
 
-Explain any configuration options available and how to set them up.
+### YAML Config File
+The configuration includes the following YAML files:
+- `namespace.yaml`: Defines a namespace to isolate resources.
+- `deployment.yaml`: Deploys the application with a specified number of replicas.
+- `service.yaml`: Exposes the deployed application internally within the cluster.
 
 ## Contributing
 
-Provide guidelines for contributing to the project, including how to report issues or submit pull requests.
+Contributions to this project are welcome! 
+If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on GitHub.
 
 ## License
 
