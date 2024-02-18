@@ -2,7 +2,9 @@ name: deploy-flask-deploy-flask-app
 
 on:
   push:
-
+  pull_request:
+    types:
+      - closed
 env:
   REGISTRY_NAME: ghcr.io
   USERNAME: ${{ github.actor }}
@@ -52,3 +54,13 @@ jobs:
         run: |
           cd tests; python test_app.py
      
+  tag-latest:
+    name: Tag latest if PR merged
+    runs-on: ubuntu-22.04
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    steps:
+      - name: Tag latest
+        if: steps.docker_build.outputs.pushed == 'true'
+        run: |
+          docker tag ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.REGISTRY_NAME }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:latest
